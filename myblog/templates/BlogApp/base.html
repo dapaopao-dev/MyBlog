@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>${self.title()}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/static/BlogApp/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/static/BlogApp/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Custom icon font-->
+    <link rel="stylesheet" href="/static/BlogApp/css/fontastic.css">
+    <!-- Google fonts - Open Sans-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <!-- Fancybox-->
+    <link rel="stylesheet" href="/static/BlogApp/vendor/@fancyapps/fancybox/jquery.fancybox.min.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/static/BlogApp/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/static/BlogApp/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="favicon.png">
+    <!-- 自定义css样式文件导入 都从这个函数开始渲染-->
+    ${self.css()}
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+
+<body>
+<!--页眉段的导航栏和搜索栏-->
+<%! from django.shortcuts import reverse %>
+<header class="header">
+    <!-- Main Navbar-->
+    <nav class="navbar navbar-expand-lg">
+        <div class="search-area">
+            <div class="search-area-inner d-flex align-items-center justify-content-center">
+                <div class="close-btn"><i class="icon-close"></i></div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8">
+                        <form action="#">
+                            <div class="form-group">
+                                <input type="search" name="search" id="search" placeholder="你想找到什么?">
+                                <button type="submit" class="submit"><i class="icon-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <!-- Navbar Brand -->
+            <div class="navbar-header d-flex align-items-center justify-content-between">
+                <!-- Navbar Brand --><a href="${reverse('index')}" class="navbar-brand">Mr.He&nbsp;Blog</a>
+                <!-- Toggle Button-->
+                <button type="button" data-toggle="collapse" data-target="#navbarcollapse"
+                        aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler"><span></span><span></span><span></span></button>
+            </div>
+            <!-- Navbar Menu -->
+            <div id="navbarcollapse" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="${reverse('index')}" class="nav-link ">首页</a>
+                    </li>
+                    <li class="nav-item"><a href="${reverse('blog_list')}" class="nav-link ">看看博客</a>
+                    </li>
+                    <li class="nav-item"><a href="${reverse('photo')}" class="nav-link ">拍了什么</a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link ">敬请期待..</a>
+                    </li>
+                </ul>
+                <div class="navbar-text"><a href="#" class="search-btn"><i class="fa fa-search"></i></a></div>
+                <div class="navbar-text">&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="${reverse('login')}">登录</a>或<a href="${reverse('register')}" >注册</a></span></div>
+            </div>
+        </div>
+    </nav>
+</header>
+<!--中间的内容部分-->
+${self.content()}
+<!-- 页脚段的代码-->
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <!-- footer下面左边的块元素显示了联系方式等内容和图标-->
+            <div class="col-md-4">
+                <div class="logo">
+                    <h6 class="text-white">Mr.He&nbsp;Blog</h6>
+                </div>
+                <div class="contact-details">
+                    <p>成都市双流区西航站楼2号</p>
+                    <p>Phone: 183XXXXXXXX</p>
+                    <p><i class="fa fa-envelope"></i>&nbsp;&nbsp;<a style="text-decoration: none;"
+                                                                    href="921120070@qq.com">921120070@qq.com</a></p>
+                    <ul class="social-menu">
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-qq"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-weixin"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-weibo"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-github"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- footer下面中间的块元素暂时没想加入什么内容-->
+            <div class="col-md-4">
+                <div class="menus d-flex">
+                    <!--留做占位符-->
+                    <ul class="list-unstyled">
+                        <li><a href="#">敬请期待</a></li>
+                    </ul>
+                    <ul class="list-unstyled">
+                        <li><a href="#">敬请期待</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- footer下面右边的块元素应该可以展示一些特殊的东西-->
+            <div class="col-md-4">
+                <div class="latest-posts"><a href="#">
+                    <div class="post d-flex align-items-center">
+                        <div class="image"><img src="" alt="..." class="img-fluid"></div>
+                        <div class="title"><strong>标题：不知道写什么</strong><span class="date last-meta">日期：暂且不加</span>
+                        </div>
+                    </div>
+                </a><a href="#">
+                    <div class="post d-flex align-items-center">
+                        <div class="image"><img src="" alt="..." class="img-fluid"></div>
+                        <div class="title"><strong>标题：不知道写什么</strong><span class="date last-meta">日期：暂且不加</span>
+                        </div>
+                    </div>
+                </a><a href="#">
+                    <div class="post d-flex align-items-center">
+                        <div class="image"><img src="" alt="..." class="img-fluid"></div>
+                        <div class="title"><strong>标题：不知道写什么</strong><span class="date last-meta">日期：暂且不加</span>
+                        </div>
+                    </div>
+                </a></div>
+            </div>
+        </div>
+    </div>
+    <div class="copyrights">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2020&nbsp;Bootstrapious All rights reserved&nbsp;Mr.He</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect
+                    from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- JavaScript files-->
+<script src="/static/BlogApp/vendor/jquery/jquery.min.js"></script>
+<script src="/static/BlogApp/vendor/popper.js/umd/popper.min.js"></script>
+<script src="/static/BlogApp/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/BlogApp/vendor/jquery.cookie/jquery.cookie.js"></script>
+<script src="/static/BlogApp/vendor/@fancyapps/fancybox/jquery.fancybox.min.js"></script>
+<script src="/static/BlogApp/js/front.js"></script>
+${self.js()}
+</body>
+</html>
+
+<%def name="title()"></%def>
+<%def name="css()"></%def>
+<%def name="content()"></%def>
+<%def name="js()"></%def>

@@ -1,0 +1,20 @@
+<%inherit file="base.html"/>
+<!--引入的标题-->
+<%def name="title()">
+Blog
+</%def>
+
+<!--引入的内容段落-->
+<%def name="content()">
+<!--页首的第一段介绍内容-->
+<section style="background: url(/static/BlogApp/image/hero.jpg); background-size: cover; background-position: center center" class="hero">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7">
+            <h1>人生苦短，我用Python<br>使用Django开发的博客页面</h1><a href="#" class="hero-link">查看更多</a>
+          </div>
+        </div><a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i>向下移动</a>
+      </div>
+</section>
+
+</%def>
