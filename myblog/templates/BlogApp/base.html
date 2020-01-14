@@ -73,7 +73,23 @@
                     </li>
                 </ul>
                 <div class="navbar-text"><a href="#" class="search-btn"><i class="fa fa-search"></i></a></div>
-                <div class="navbar-text">&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="${reverse('login')}">登录</a>或<a href="${reverse('register')}" >注册</a></span></div>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                % if request.user.is_authenticated:
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="login-1"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="caret">${request.user.username}</span>
+                    </button>
+                    <ul class="dropdown-menu user-text" aria-labelledby="login-1">
+                        <li><a href="${reverse('logout')}">注销登录</a></li>
+                        <li><a href="${reverse('my_center')}">个人中心</a></li>
+                        <li><a href="${reverse('blog_publish')}">发表博客</a></li>
+                    </ul>
+                </div>
+                % else :
+                <div class="navbar-text"><span><a href="${reverse('login')}">登录</a>或<a
+                        href="${reverse('register')}">注册</a></span></div>
+                % endif
             </div>
         </div>
     </nav>

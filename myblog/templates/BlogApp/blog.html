@@ -8,10 +8,116 @@ Blog
 </%def>
 
 <%def name="content()">
-<div class="jumbotron">
-  <h1>Hello, world!</h1>
-  <p>这是我的博客列表页</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+<%! from django.shortcuts import reverse %>
+<div class="container">
+    <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-8">
+            <div class="container">
+                <div class="row">
+                    <!-- post -->
+                    % for blog in blog_paginator:
+                    <div class="post col-xl-6">
+                        <!--博客封面-->
+                        <div class="post-thumbnail">
+                            <a href="${reverse('blog_details', kwargs={'blog_id':blog.id})}">
+                                <img src="${blog.cover}" alt="..." class="img-fluid">
+                            </a>
+                        </div>
+                        <div class="post-details">
+                            <!--发表日期以及分类标签-->
+                            <div class="post-meta d-flex justify-content-between">
+                                <div class="date meta-last">${blog.create_time.strftime('%Y-%m-%d|%H:%M')}</div>
+                                <div class="category"><span>类型: ${blog.type.name}</span></div>
+                            </div>
+                            <!--博客标题-->
+                            <a href="${reverse('blog_details', kwargs={'blog_id':blog.id})}">
+                                <h3 class="h4">${blog.title}</h3></a>
+                            <!--博客部分内容或描述-->
+                            <p class="text-muted">${blog.content[:15]+'...'}</p>
+                            <!--博客的尾部信息，我去掉了头像部分-->
+                            <footer class="post-footer d-flex align-items-center">
+                                <!--博客作者-->
+                                <a href="#" class="author d-flex align-items-center flex-wrap">
+                                    <div class="title"><span>${blog.user.username}</span></div>
+                                </a>
+                                <!--博客的点赞量，浏览量，评论量-->
+                                <div class="views"><a href="#"><i class="fa fa-heart"></i></a>${blog.enjoy}</div>
+                                <div class="views"><a href="#"><i class="fa fa-eye"></i></a>${blog.page_view}</div>
+                                <div class="comments meta-last">
+                                    <a href="#">
+                                        <i class="fa fa-commenting-o"></i>
+                                    </a>${blog.comment.count()}
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                    % endfor
+                </div>
+                <!-- Pagination -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-template d-flex justify-content-center">
+
+
+                        % if blog_paginator.has_previous():
+                        <li class="page-item"><a href="${reverse('blog_list')}?page=1" class="page-link"><i
+                                class="fa fa-angle-left"></i></a></li>
+                        <li class="page-item"><a
+                                href="${reverse('blog_list')}?page=${blog_paginator.previous_page_number()}"
+                                class="page-link active">${blog_paginator.number-1}</a></li>
+                        % endif
+
+                        <li class="page-item"><span class="page-link active">${blog_paginator.number}</span></li>
+
+                        % if blog_paginator.has_next():
+                        <li class="page-item"><a href="${reverse('blog_list')}?page=${blog_paginator.next_page_number()}"
+                                                 class="page-link active">${blog_paginator.number+1}</a></li>
+                        <li class="page-item"><a
+                                href="${reverse('blog_list')}?page=${blog_paginator.paginator.num_pages}"
+                                class="page-link"><i class="fa fa-angle-right"></i></a></li>
+                        % endif
+                    </ul>
+                </nav>
+            </div>
+        </main>
+
+        <aside class="col-lg-4">
+            <!-- 搜素框部件-->
+            <div class="widget search">
+                <header>
+                    <h3 class="h6">在这里搜索博客</h3>
+                </header>
+                <form action="#" class="search-form">
+                    <div class="form-group">
+                        <input type="search" placeholder="找点你需要的?">
+                        <button type="submit" class="submit"><i class="icon-search"></i></button>
+                    </div>
+                </form>
+            </div>
+
+            <!--热门前三博客-->
+            <div class="widget latest-posts">
+                <header>
+                    <h3 class="h6">Top3</h3>
+                </header>
+                <div class="blog-posts">
+                    % for bo in blog_top:
+                    <a href="${reverse('blog_details', kwargs={'blog_id':bo.id})}">
+                        <div class="item d-flex align-items-center">
+                            <div class="image"><img src="${bo.cover}" alt="..." class="img-fluid"></div>
+                            <div class="title"><strong>${bo.title}</strong>
+                                <div class="d-flex align-items-center">
+                                    <div class="views"><i class="fa fa-eye"></i> ${bo.page_view}</div>
+                                    <div class="comments"><i class="fa fa-commenting-o"></i>${bo.comment.count()}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    % endfor
+                </div>
+            </div>
+        </aside>
+    </div>
 </div>
 </%def>
 

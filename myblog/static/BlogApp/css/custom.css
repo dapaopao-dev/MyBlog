@@ -10,3 +10,33 @@
 .form-group{
     text-align: center;
 }
+
+.user-text{
+    text-align: center;
+}
+
+.blog-type-style {
+    display: inline;
+    width:35%;
+}
+
+#title-1{
+    width:16%;
+}
+#blog-type{
+    width:12%;
+}
+.label-blog{
+    margin-left: 20px;
+}
+#center-table{
+    margin-left: 7%;
+    margin-top: 36px;
+    width: 75%;
+    height: 500px;
+}
+
+.index-image{
+    height:420px;
+    width:420px;
+}

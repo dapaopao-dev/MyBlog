@@ -1,0 +1,59 @@
+<%inherit file="base.html"/>
+
+<%def name="title()">
+个人中心-首页
+</%def>
+<%def name="content()">
+<%! from django.shortcuts import reverse %>
+<div class="container-fluid">
+    <div class="row">
+        <div>
+            <div class="list-group">
+                <a href="${reverse('my_center')}" class="list-group-item active">
+                    查看发布的博客
+                </a>
+                <a href="#" class="list-group-item">
+                    修改邮箱
+                </a>
+                <a href="#" class="list-group-item">
+                    修改密码
+                </a>
+            </div>
+        </div>
+
+        <div id="center-table" style="height: auto;">
+            <h1 style="text-align: center;">修改你的博客</h1>
+            <form style="margin:20px 0;" action="${reverse('update_blog', kwargs={'update_blog_id': update_blog.id})}"
+                  method="post">
+                ${csrf_token}
+                <input type="hidden" name="up_id" value="${update_blog.id}">
+                <div class="form-group">
+                    <label for="title-1" class="label-blog">添加标题 : </label>
+                    <input type="text" name="title" class="blog-type-style form-control" id="title-1" placeholder="标题"
+                           required value="${update_blog.title}">
+                    <label for="blog-type" class="label-blog">添加分类 : </label>
+                    <select name="type" class="blog-type-style form-control" id="blog-type">
+                        % for type in blog_type:
+                        % if type.name == update_blog.type.name:
+                        <option selected="selected">${type.name}</option>
+                        % else:
+                        <option>${type.name}</option>
+                        % endif
+                        % endfor
+                    </select>
+                    <label for="cover-1" class="label-blog">添加封面 : </label>
+                    <input type="text" name="cover" class="blog-type-style form-control" id="cover-1" placeholder="封面链接"
+                           value="${update_blog.cover}">
+                </div>
+                <div class="form-group">
+                <textarea class="form-control" name="content" rows="15" id="content-1"
+                          required>${update_blog.content}</textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info">点击保存修改</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</%def>

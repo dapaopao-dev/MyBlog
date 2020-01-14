@@ -7,14 +7,73 @@ Blog
 <!--引入的内容段落-->
 <%def name="content()">
 <!--页首的第一段介绍内容-->
-<section style="background: url(/static/BlogApp/image/hero.jpg); background-size: cover; background-position: center center" class="hero">
-      <div class="container">
+<section
+        style="background: url(/static/BlogApp/image/hero.jpg); background-size: cover; background-position: center center"
+        class="hero">
+    <div class="container">
         <div class="row">
-          <div class="col-lg-7">
-            <h1>人生苦短，我用Python<br>使用Django开发的博客页面</h1><a href="#" class="hero-link">查看更多</a>
-          </div>
-        </div><a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i>向下移动</a>
-      </div>
+            <div class="col-lg-7">
+                <h1>人生苦短，我用Python<br>使用Django开发的博客页面</h1><a href="#" class="hero-link">查看更多</a>
+            </div>
+        </div>
+        <a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i>向下移动</a>
+    </div>
 </section>
+
+<div class="container marketing">
+
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">我的业余时间<span
+                    class="text-muted">哈沙尅！</span></h2>
+            <p class="lead">业余时间你们都会玩些什么呢？我喜欢玩亚索，是的，最坑的那个</p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block index-image" alt="500x500"
+                 src="/static/BlogApp/image/promo-yasuo-image.jpg" >
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+
+        <div class="col-md-7 col-md-pull-5">
+            <img class="featurette-image img-responsive center-block index-image" data-src="holder.js/500x500/auto" alt="500x500"
+                 src=""
+                 data-holder-rendered="true">
+        </div>
+        <div class="col-md-5 col-md-push-5">
+            <h2 class="featurette-heading">第二个介绍 <span class="text-muted">我很需要</span>
+            </h2>
+            <p class="lead">这里我还不知道该写点什么，就让它先空着吧！</p>
+        </div>
+
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">第三个介绍 <span class="text-muted">Checkmate.</span></h2>
+            <p class="lead">这里我还不知道该写点什么，就让它先空着吧！</p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block index-image" data-src="holder.js/500x500/auto" alt="500x500"
+                 src=""
+                 data-holder-rendered="true">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+
+</div>
 
 </%def>

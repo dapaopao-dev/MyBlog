@@ -1,0 +1,74 @@
+<%inherit file="base.html"/>
+
+<%def name="title()">
+个人中心-首页
+</%def>
+<%def name="content()">
+<%! from django.shortcuts import reverse %>
+<div class="container-fluid">
+    <div class="row">
+        <div>
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    查看发布的博客
+                </a>
+                <a href="#" class="list-group-item">
+                    修改邮箱
+                </a>
+                <a href="#" class="list-group-item">
+                    修改密码
+                </a>
+            </div>
+        </div>
+
+        <div id="center-table">
+            <div class="panel panel-info">
+                <!-- Default panel contents -->
+                <div class="panel-heading">查看发表的博客</div>
+
+                <!-- Table -->
+                <table class="table table-hover">
+                    <tr>
+                        <th>标题</th>
+                        <th>内容</th>
+                        <th>发表时间</th>
+                        <th>浏览量</th>
+                        <th>点赞量</th>
+                        <th>分类</th>
+                        <th>封面</th>
+                        <th>操作</th>
+                    </tr>
+                    % for user_blog in user_blog_list:
+                    <tr>
+                        <td><a href="${reverse('update_blog', kwargs={'update_blog_id': user_blog.id})}">${user_blog.title[:10]}...</a></td>
+                        <td>${user_blog.content[:10]}...</td>
+                        <td>${user_blog.create_time.strftime('%Y-%m-%d %H:%M')}</td>
+                        <td>${user_blog.page_view}</td>
+                        <td>${user_blog.enjoy}</td>
+                        <td>${user_blog.type}</td>
+                        <td><img src="${user_blog.cover}" style="height: 40px; width: 40px;"></td>
+                        <td><a href="#">删除</a></td>
+                    </tr>
+                    % endfor
+                </table>
+                <div class="pagination">
+                    <span class="span-links">
+                        % if user_blog_list.has_previous():
+                            <a href="${reverse('my_center')}?page=1">首页</a>
+                            <a href="${reverse('my_center')}?page=${user_blog_list.previous_page_number()}">上一页|</a>
+                        % endif
+                        <a>&nbsp;当前页:${user_blog_list.number}&nbsp;</a>
+                        % if user_blog_list.has_next():
+                            <a href="${reverse('my_center')}?page=${user_blog_list.next_page_number()}">|下一页</a>
+                            <a href="${reverse('my_center')}?page=${user_blog_list.paginator.num_pages}">尾页</a>
+                        % endif
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</%def>

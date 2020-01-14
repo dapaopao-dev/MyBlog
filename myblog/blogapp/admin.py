@@ -5,10 +5,8 @@ from .models import CustomUser, Blog, BlogType, Comment
 admin.site.register(CustomUser, UserAdmin)
 
 
-class BlogAdmin(admin.ModelAdmin):
-    pass
-
-
-admin.site.register(Blog, BlogAdmin)
+admin.site.register(Blog)
 
 admin.site.register(BlogType)
+
+admin.site.register(Comment)

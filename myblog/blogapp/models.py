@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
     """一个自定义的用户模型，在内置模型的基础上会扩展一些字段：头像"""
 
     def __str__(self):
-        return "自定义的用户模型"
+        return self.username
 
 
 class BlogType(models.Model):
@@ -17,7 +17,7 @@ class BlogType(models.Model):
     name = models.CharField(max_length=18, null=True, verbose_name='分类')
 
     def __str__(self):
-        return "分类模型"
+        return self.name
 
 
 class Blog(models.Model):
@@ -29,22 +29,28 @@ class Blog(models.Model):
     page_view = models.IntegerField(default=0, verbose_name='浏览量')
     enjoy = models.IntegerField(default=0, verbose_name='点赞量')
     type = models.ForeignKey(BlogType, on_delete=models.SET_NULL, null=True, related_name='blog', verbose_name='博客分类')
+    cover = models.CharField(max_length=200, default='...', verbose_name='封面')
+    status = models.BooleanField(default=False, verbose_name='博客状态')
+    illustrations = models.CharField(max_length=600, verbose_name='插图', blank=True)
 
-    def get_hot_blog(self):
+    @classmethod
+    def get_hot_blog(cls):
         """返回最热门的前三博客内容"""
-        return Blog.objects.order_by('page_view', 'enjoy')[:3]
+        return cls.objects.order_by('page_view', 'enjoy')[:3]
 
     def __str__(self):
-        return "自定义的博客模型"
+        return self.title
 
 
 class Comment(models.Model):
     """自定义的一个评论模型"""
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='comment', verbose_name='评论用户')
+    username = models.CharField(max_length=30, blank=False, default='', verbose_name='评论名')
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comment', verbose_name='评论博客')
     content = models.CharField(max_length=300, blank=False, verbose_name='评论内容')
     enjoy = models.IntegerField(default=0, verbose_name='点赞量')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='评论时间')
+    email = models.EmailField(default='')
+    status = models.BooleanField(default=False)
 
     def __str__(self):
-        return "自定义的评论模型"
+        return self.content

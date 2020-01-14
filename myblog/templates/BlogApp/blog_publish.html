@@ -1,0 +1,40 @@
+<%inherit file="my_center.html"/>
+
+<%def name="title()">
+个人设置-发表博客
+</%def>
+
+<%def name="content()">
+<%! from django.shortcuts import reverse %>
+<div class="container">
+% if error:
+<script>
+    var waring = "${error}";
+    window.alert(waring);
+    </script>
+% endif
+    <h1 style="text-align: center;margin:30px 0;">添加你的博客</h1>
+    <form style="margin:20px 0;" action="${reverse('blog_publish')}" method="post">
+        ${csrf_token}
+        <div class="form-group">
+            <label for="title-1" class="label-blog">添加标题 : </label>
+            <input type="text" name="title" class="blog-type-style form-control" id="title-1" placeholder="标题"
+                   required>
+            <label for="blog-type" class="label-blog">添加分类 : </label>
+            <select name="blog_type" class="blog-type-style form-control" id="blog-type">
+                % for type in blog_type:
+                <option>${type.name}</option>
+                % endfor
+            </select>
+            <label for="cover-1" class="label-blog">添加封面 : </label>
+            <input type="text" name="cover" class="blog-type-style form-control" id="cover-1" placeholder="封面链接">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" name="content" rows="15" id="content-1" required></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-info">发表博客</button>
+        </div>
+    </form>
+</div>
+</%def>
